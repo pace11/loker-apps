@@ -13,9 +13,6 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="?page=datasiswapjb" class=""><i class="fa fa-users"></i> <span>Data Siswa Pemilih PJB</span></a></li>
-                <li><a href="?page=metode" class=""><i class="fa fa-refresh"></i> <span>Proses Perhitungan Topsis</span></a></li>
-                <li><a href="?page=hasil" class=""><i class="fa fa-check-circle"></i> <span>Hasil Topsis PJB Class</span></a></li>
             </ul>
         </nav>
     </div>

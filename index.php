@@ -35,8 +35,8 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item cta mr-md-1"><a href="new-post.html" class="nav-link">Login sebagai Pendaftar</a></li>
-					<li class="nav-item cta cta-colored"><a href="job-post.html" class="nav-link">Login sebagai Administrator</a></li>
+					<li class="nav-item cta mr-md-1"><a href="portal/login.php" class="nav-link"><i class="fas fa-sign-in-alt"></i> Masuk</a></li>
+					<li class="nav-item cta cta-colored"><a href="portal/login.php" class="nav-link"><i class="fas fa-user-plus"></i> Daftar</a></li>
 				</ul>
 			</div>
 		</div>
@@ -56,49 +56,6 @@
 		</div>
 	</div>
 
-	<section class="ftco-section services-section">
-		<div class="container">
-			<div class="row d-flex">
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block">
-						<div class="icon"><span class="flaticon-resume"></span></div>
-						<div class="media-body">
-							<h3 class="heading mb-3">Cari Lowongan Pekerjaan</h3>
-							<p>Sesuai lowongan dengan pilihan dan minat dari anda</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block">
-						<div class="icon"><span class="flaticon-team"></span></div>
-						<div class="media-body">
-							<h3 class="heading mb-3">Mudah dalam manajemen data</h3>
-							<p>Sangat mudah dalam mengatur jadwal dari lowongan yang diambil</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block">
-						<div class="icon"><span class="flaticon-career"></span></div>
-						<div class="media-body">
-							<h3 class="heading mb-3">Karir Top</h3>
-							<p>Meningkatan karir anda dengan passion yang dimiliki</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block">
-						<div class="icon"><span class="flaticon-employees"></span></div>
-						<div class="media-body">
-							<h3 class="heading mb-3">Pencarian Talenta Terbaik</h3>
-							<p>Sangat membantu dalam memilih talenta terbaik</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row">
@@ -112,7 +69,7 @@
 					<div class="row">
 						<div class="col-md-12 ftco-animate">
 							<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-								<div class="one-third mb-4 mb-md-0">
+								<div class="one-third col-md-10">
 									<div class="job-post-item-header align-items-center">
 										<span class="subadge">Partime</span>
 										<h2 class="mr-3 text-black"><a href="#">Frontend Development</a></h2>
@@ -121,42 +78,11 @@
 										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> Jakarta - Indonesia</div>
 									</div>
 								</div>
-
-								<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-									<div>
-										<a href="#"
-											class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-											<span class="icon-heart"></span>
-										</a>
-									</div>
-									<a href="job-single.html" class="btn btn-primary py-2">Pilih <i class="fas fa-check-circle"></i></a>
+								<div class="one-forth col-md-2">
+									<a href="job-single.html" class="btn btn-primary btn-block">Pilih <i class="fas fa-check-circle"></i></a>
 								</div>
 							</div>
-						</div><!-- end -->
-
-						<div class="col-md-12 ftco-animate">
-							<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-								<div class="one-third mb-4 mb-md-0">
-									<div class="job-post-item-header align-items-center">
-										<span class="subadge">Fulltime</span>
-										<h2 class="mr-3 text-black"><a href="#">Full Stack Developer</a></h2>
-									</div>
-									<div class="job-post-item-body d-block d-md-flex">
-										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> Jakarta - Indonesia</div>
-									</div>
-								</div>
-
-								<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-									<div>
-										<a href="#"
-											class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-											<span class="icon-heart"></span>
-										</a>
-									</div>
-									<a href="job-single.html" class="btn btn-primary py-2">Pilih <i class="fas fa-check-circle"></i></a>
-								</div>
-							</div>
-						</div><!-- end -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -171,9 +97,9 @@
 						<h2 class="ftco-heading-2">Ada Pertanyaan ?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">Duri Kosambi, Jakarta Barat, Menara PLN</span></li>
-								<li><span class="icon icon-phone"></span><span class="text">021-544789</span></li>
-								<li><span class="icon icon-envelope"></span><span class="text">pegawai@loker.com</span></li>
+								<li><i class="fas fa-map-marker-alt" style="margin-right:10px;"></i> <span class="text">Duri Kosambi, Jakarta Barat, Menara PLN</span></li>
+								<li><i class="fas fa-phone" style="margin-right:10px;"></i> <span class="text">021-544789</span></li>
+								<li><i class="fas fa-envelope" style="margin-right:10px;"></i><span class="text">pegawai@loker.com</span></li>
 							</ul>
 						</div>
 					</div>
@@ -185,7 +111,7 @@
 					<p>
 						Copyright &copy;
 						<?= date('F Y') ?> All rights reserved | This template
-						is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by LokerPegawai
+						is made with <i class="fas fa-heart"></i> by LokerPegawai
 					</p>
 				</div>
 			</div>
