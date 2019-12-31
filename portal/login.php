@@ -57,6 +57,8 @@
 								$hit2 = mysqli_num_rows($ceklogin2);
 
 								if ($hit1 > 0){
+									$now = date('Y-m-d h:i:s');
+									mysqli_query($conn, "UPDATE user SET login_terakhir = '$now' WHERE id='$data1[id]'");
 									echo '<span class="label label-primary label-block">Login Berhasil <i class="fa fa-check"></i></span>';
 									echo "<meta http-equiv='refresh' content='1;
 									url=index.php?page=beranda'>";
@@ -66,6 +68,8 @@
 								}
 
 								if ($hit2 > 0){
+									$now = date('Y-m-d h:i:s');
+									mysqli_query($conn, "UPDATE admin SET login_terakhir = '$now' WHERE id='$data2[id]'");
 									echo '<span class="label label-primary label-block">Login Berhasil <i class="fa fa-check"></i></span>';
 									echo "<meta http-equiv='refresh' content='1;
 									url=index.php?page=beranda'>";

@@ -25,6 +25,25 @@
 	<link rel="stylesheet" href="assets/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css">
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<style>
+		.field-icon {
+			float: right;
+			margin-right: 8px;
+			margin-top: -25px;
+			position: relative;
+			z-index: 2;
+			cursor:pointer;
+		}
+		.box-circle {
+			background: #676a6d; 
+			color: white; 
+			padding: 5px; 
+			border-radius: 50%;
+			width: 28px;
+			text-align: center;
+		}
+
+  </style>
 </head>
 
 <body>
@@ -62,6 +81,17 @@
 			$('.example').DataTable()
 		});
 	</script>
+	<script>
+		$(".toggle-password").click(function() {
+			$(this).toggleClass("fa-eye");
+				var input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
+  </script>
 </body>
 </html>
 <?php 
