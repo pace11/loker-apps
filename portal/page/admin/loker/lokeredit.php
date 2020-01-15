@@ -1,5 +1,5 @@
 <?php 
-    $g = mysqli_query($conn, "SELECT * FROM tbl_kategorisurat WHERE id_kategori='$_GET[id]'");
+    $g = mysqli_query($conn, "SELECT * FROM lowongan WHERE id='$_GET[id]'");
     $data = mysqli_fetch_array($g);
 ?>
 <div class="panel panel-headline">
@@ -7,10 +7,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="pull-left">
-                    <h3 class="panel-title">Edit Kategori Surat</h3>
+                    <h3 class="panel-title">Edit Lowongan Pekerjaan</h3>
                     <p class="panel-subtitle"></p>
-                </div>
-                <div class="pull-right">
                 </div>
             </div>
         </div>
@@ -18,46 +16,62 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <form action="?page=kategorieditpro" method="post" enctype="multipart/form-data">
+                <form action="?page=lokereditpro" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
-                                <a class="btn btn-success"><i class="fa fa-file"></i> <?= $data['id_kategori'] ?></a>
-                                <input type="hidden" name="id_kategori" value="<?= $data['id_kategori'] ?>">
+                                <a class="btn btn-success"><i class="fa fa-briefcase"></i> <?= $data['id'] ?></a>
+                                <input type="hidden" name="id" value="<?= $data['id'] ?>">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
-                                <label>Nama Surat</label>
-                                <input type="text" class="form-control" name="nama" placeholder="masukkan nama surat" autocomplete="OFF" value="<?= $data['nama'] ?>" required>
+                                <label>Judul</label>
+                                <textarea class="form-control" name="judul" placeholder="masukkan judul lowongan pekerjaan" autocomplete="OFF" required><?= $data['judul'] ?></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
-                                <label>Kode Surat</label>
-                                <input type="text" maxlength="3" class="form-control kapital" name="kode" placeholder="masukkan kode surat (maks: 3 karatker)" autocomplete="OFF" value="<?= $data['kode'] ?>" required>
+                                <label>Lokasi Pendaftaran</label>
+                                <select class="form-control" name="lokasi">
+                                <?php 
+                                    $prov = mysqli_query($conn, "SELECT * FROM provinsi");
+                                    while($value = mysqli_fetch_array($prov)) { ?>
+                                    <option value="<?= $value['id'] ?>" <?= $data['provinsi_id'] == $value['id'] ? 'selected' : '' ?>><?= $value['nama'] ?></option>
+                                <?php } ?>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
-                                <label>Keterangan Surat</label>
-                                <textarea class="form-control" name="keterangan" placeholder="masukkan keterangan surat" autocomplete="OFF"><?= $data['ket'] ?></textarea>
+                                <label>Tipe</label>
+                                <select class="form-control" name="tipe">
+                                    <option value="fulltime" <?= $data['tipe'] == 'fulltime' ? 'selected' : '' ?>>Fulltime</option>
+                                    <option value="kontrak" <?= $data['tipe'] == 'kontrak' ? 'selected' : '' ?>>Kontrak</option>
+                                    <option value="magang" <?= $data['tipe'] == 'magang' ? 'selected' : '' ?>>Magang</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
-                                <label>File Contoh Surat</label>
-                                <p><?= $data['file'] ?></p>
-                                <input type="hidden" name="fileold" value="<?= $data['file'] ?>">
-                                <input type="file" class="form-control" name="file" value="<?= $data['ket'] ?>">
+                                <label>Tanggal Mulai Pendaftaran</label>
+                                <input type="date" class="form-control" name="tglmulaidaftar" value="<?= date('Y-m-d', strtotime($data['mulai_pendaftaran'])) ?>" autocomplete="OFF" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div clas="form-group">
+                                <label>Tanggal Akhir Pendaftaran</label>
+                                <input type="date" class="form-control" name="tglakhirdaftar" value="<?= date('Y-m-d', strtotime($data['akhir_pendaftaran'])) ?>" autocomplete="OFF" required>
                             </div>
                         </div>
                     </div>
@@ -66,7 +80,7 @@
     </div>
     <div class="panel-footer">
         <input type="submit" name="submit" class="btn btn-primary" value="simpan">
-        <a href="?page=kategori" class="btn btn-default">kembali</a>
+        <a href="?page=loker" class="btn btn-default">kembali</a>
     </div>
     </form>
 </div>

@@ -1,3 +1,8 @@
+<?php
+	date_default_timezone_set('Asia/Jakarta');
+	include "portal/lib/koneksi.php";
+	include "service.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,22 +72,33 @@
 						</div>
 					</div>
 					<div class="row">
+						<?php 
+							$q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
+													JOIN provinsi ON lowongan.provinsi_id=provinsi.id
+													ORDER BY lowongan.mulai_pendaftaran ASC");
+							while($data = mysqli_fetch_array($q)) {
+							$datenow  = new DateTime(getDateNow());
+							$datestart  = new DateTime($data['mulai_pendaftaran']);
+							$dateend  = new DateTime($data['akhir_pendaftaran']);
+							if ($datestart == $datenow || $datestart >= $datenow || $dateend >= $datenow) {
+						?>
 						<div class="col-md-12 ftco-animate">
-							<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-								<div class="one-third col-md-10">
+							<div class="job-post-item p-4 d-block d-lg-flex align-items-center" style="border-radius: 15px;">
+								<div class="one-third col-md-9">
 									<div class="job-post-item-header align-items-center">
-										<span class="subadge">Partime</span>
-										<h2 class="mr-3 text-black"><a href="#">Frontend Development</a></h2>
+										<span style="text-transform: capitalize;"><?= $data['tipe'] ?></span>
+										<h2 class="mr-3 text-black"><a href="#"><?= $data['judul'] ?></a></h2>
 									</div>
 									<div class="job-post-item-body d-block d-md-flex">
-										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> Jakarta - Indonesia</div>
+										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> <?= $data['nama'] ?> - Mulai Pendaftaran: <?= date("d M Y", strtotime($data['mulai_pendaftaran']))." - ".date("d M Y", strtotime($data['akhir_pendaftaran'])) ?></div>
 									</div>
 								</div>
-								<div class="one-forth col-md-2">
-									<a href="job-single.html" class="btn btn-primary btn-block">Pilih <i class="fas fa-check-circle"></i></a>
+								<div class="one-forth col-md-3">
+									<?= getActiveJob($data['mulai_pendaftaran'],$data['akhir_pendaftaran']) ?>
 								</div>
 							</div>
 						</div>
+						<?php }} ?>
 					</div>
 				</div>
 			</div>

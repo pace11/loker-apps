@@ -14,6 +14,9 @@
                     </div>
                 </li>
                 <?php } ?>
+                <?php if ($_SESSION['role'] == 2) { ?>
+                <li><a href="?page=loker" class=""><i class="fa fa-briefcase"></i> <span>Lowongan Pekerjaan</span></a></li>
+                <?php } ?>
             </ul>
         </nav>
     </div>
