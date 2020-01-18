@@ -6,6 +6,7 @@
 -- Generation Time: Jan 15, 2020 at 07:15 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
+-- punya eqhie
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
