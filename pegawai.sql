@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2020 at 05:38 PM
+-- Generation Time: Jan 19, 2020 at 06:04 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -52,7 +52,6 @@ INSERT INTO `admin` (`id`, `nama_lengkap`, `email`, `password`, `login_terakhir`
 CREATE TABLE `kesehatan` (
   `id` varchar(10) CHARACTER SET latin1 NOT NULL,
   `pendaftaran_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
-  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `kesehatan_nilai` int(3) DEFAULT NULL,
   `kesehatan_bobot` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -183,9 +182,20 @@ INSERT INTO `provinsi` (`id`, `nama`) VALUES
 CREATE TABLE `psikotest` (
   `id` varchar(10) CHARACTER SET latin1 NOT NULL,
   `pendaftaran_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
-  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `psikotest_nilai` int(3) DEFAULT NULL,
   `psikotest_bobot` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ranking`
+--
+
+CREATE TABLE `ranking` (
+  `id` int(5) NOT NULL,
+  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
+  `ranking_nilai` decimal(5,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -226,7 +236,6 @@ INSERT INTO `user` (`id`, `nik`, `nama_lengkap`, `tgl_lahir`, `alamat`, `jenis_k
 CREATE TABLE `wawancara` (
   `id` varchar(14) CHARACTER SET latin1 NOT NULL,
   `pendaftaran_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
-  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `wawancara_nilai` int(3) DEFAULT NULL,
   `wawancara_bobot` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -246,8 +255,7 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `kesehatan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pendaftaran_id` (`pendaftaran_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `pendaftaran_id` (`pendaftaran_id`);
 
 --
 -- Indexes for table `lowongan`
@@ -281,7 +289,13 @@ ALTER TABLE `provinsi`
 --
 ALTER TABLE `psikotest`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pendaftaran_id` (`pendaftaran_id`),
+  ADD KEY `pendaftaran_id` (`pendaftaran_id`);
+
+--
+-- Indexes for table `ranking`
+--
+ALTER TABLE `ranking`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -295,8 +309,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `wawancara`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pendaftaran_id` (`pendaftaran_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `pendaftaran_id` (`pendaftaran_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -322,8 +335,7 @@ ALTER TABLE `pemberkasan`
 -- Constraints for table `kesehatan`
 --
 ALTER TABLE `kesehatan`
-  ADD CONSTRAINT `kesehatan_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`),
-  ADD CONSTRAINT `kesehatan_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `kesehatan_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`);
 
 --
 -- Constraints for table `lowongan`
@@ -347,15 +359,19 @@ ALTER TABLE `pendaftaran`
 -- Constraints for table `psikotest`
 --
 ALTER TABLE `psikotest`
-  ADD CONSTRAINT `psikotest_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`),
-  ADD CONSTRAINT `psikotest_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `psikotest_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`);
+
+--
+-- Constraints for table `ranking`
+--
+ALTER TABLE `ranking`
+  ADD CONSTRAINT `ranking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `wawancara`
 --
 ALTER TABLE `wawancara`
-  ADD CONSTRAINT `wawancara_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`),
-  ADD CONSTRAINT `wawancara_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `wawancara_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
