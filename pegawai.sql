@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2020 at 07:15 PM
+-- Generation Time: Jan 19, 2020 at 05:38 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
--- punya eqhie
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +41,21 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama_lengkap`, `email`, `password`, `login_terakhir`) VALUES
-(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-15 07:05:42');
+(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-15 07:46:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kesehatan`
+--
+
+CREATE TABLE `kesehatan` (
+  `id` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `pendaftaran_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
+  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
+  `kesehatan_nilai` int(3) DEFAULT NULL,
+  `kesehatan_bobot` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -201,7 +214,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nik`, `nama_lengkap`, `tgl_lahir`, `alamat`, `jenis_kelamin`, `email`, `no_hp`, `password`, `image_url`, `login_terakhir`) VALUES
 ('USER000001', '9171030506960007', 'Muhammad Iriansyah Putra Pratama', '1996-06-05', 'Jl. H Junib No.18', 'L', 'ryanjoker87@gmail.com', '082248080870', 'Pace1996', 'USER000001_image_upload.jpg', NULL),
-('USER000002', '9171030506960010', 'Ryan Pace Pratama', '1996-06-05', 'Jl. H Junib No. 18 Duri Kosambi', 'L', 'pace@gmail.com', '081344460967', 'pace10', 'USER000002_image_upload.jpg', '2020-01-15 06:57:07'),
+('USER000002', '9171030506960010', 'Ryan Pace Pratama', '1996-06-05', 'Jl. H Junib No. 18 Duri Kosambi', 'L', 'pace@gmail.com', '081344460967', 'pace10', 'USER000002_image_upload.jpg', '2020-01-15 07:48:28'),
 ('USER000003', '9149014901859018', 'Eqi Seftiyan', '1970-01-01', 'Tigaraksa', 'L', 'eqhie@gmail.com', '081354141927', 'eqhie10', 'USER000003_image_upload.jpeg', '2020-01-15 07:01:10');
 
 -- --------------------------------------------------------
@@ -227,6 +240,14 @@ CREATE TABLE `wawancara` (
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kesehatan`
+--
+ALTER TABLE `kesehatan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pendaftaran_id` (`pendaftaran_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `lowongan`
@@ -296,6 +317,13 @@ ALTER TABLE `pemberkasan`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `kesehatan`
+--
+ALTER TABLE `kesehatan`
+  ADD CONSTRAINT `kesehatan_ibfk_1` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`),
+  ADD CONSTRAINT `kesehatan_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `lowongan`
