@@ -36,6 +36,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div clas="form-group">
+                                <label>Deksripsi</label>
+                                <textarea class="form-control" name="deskripsi" placeholder="masukkan deskripsi lowongan pekerjaan" autocomplete="OFF" required><?= $data['deskripsi'] ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div clas="form-group">
                                 <label>Lokasi Pendaftaran</label>
                                 <select class="form-control" name="lokasi">
                                 <?php 

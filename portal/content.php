@@ -38,6 +38,7 @@ switch($_SESSION['role']){
         //------------------------------------ LOKER ------------------------------------
         elseif ($page == 'loker')               include("page/pendaftar/loker/loker.php");
         elseif ($page == 'lokeradd')            include("page/pendaftar/loker/lokeradd.php");
+        elseif ($page == 'lokeractive')         include("page/pendaftar/loker/lokeractive.php");
 
         else include("page/404.php");
     break;

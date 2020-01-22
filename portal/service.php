@@ -69,5 +69,35 @@ function getIdPsikotest(){
     return $id_k;
 }
 
+function getIdKesehatan(){
+    include "lib/koneksi.php";
+    $get_id = mysqli_query($conn, "SELECT id FROM kesehatan WHERE SUBSTRING(id,1,5)='SEHAT'") or die (mysqli_error($conn));
+    $trim_id = mysqli_query($conn, "SELECT SUBSTRING(id,-5,5) as hasil FROM kesehatan WHERE SUBSTRING(id,1,5)='SEHAT' ORDER BY hasil DESC LIMIT 1") or die (mysqli_error($conn));
+    $hit    = mysqli_num_rows($get_id);
+    if ($hit == 0){
+        $id_k   = "SEHAT00001";
+    } else if ($hit > 0){
+        $row    = mysqli_fetch_array($trim_id);
+        $kode   = $row['hasil']+1;
+        $id_k   = "SEHAT".str_pad($kode,5,"0",STR_PAD_LEFT); 
+    }
+    return $id_k;
+}
+
+function getIdWawancara(){
+    include "lib/koneksi.php";
+    $get_id = mysqli_query($conn, "SELECT id FROM wawancara WHERE SUBSTRING(id,1,9)='WAWANCARA'") or die (mysqli_error($conn));
+    $trim_id = mysqli_query($conn, "SELECT SUBSTRING(id,-5,5) as hasil FROM wawancara WHERE SUBSTRING(id,1,9)='WAWANCARA' ORDER BY hasil DESC LIMIT 1") or die (mysqli_error($conn));
+    $hit    = mysqli_num_rows($get_id);
+    if ($hit == 0){
+        $id_k   = "WAWANCARA00001";
+    } else if ($hit > 0){
+        $row    = mysqli_fetch_array($trim_id);
+        $kode   = $row['hasil']+1;
+        $id_k   = "WAWANCARA".str_pad($kode,5,"0",STR_PAD_LEFT); 
+    }
+    return $id_k;
+}
+
 
 ?>

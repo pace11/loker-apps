@@ -16,6 +16,7 @@
                     if (isset($_POST['submit'])){
                         $id         = $_POST['id'];
                         $judul      = $_POST['judul'];
+                        $deskripsi  = $_POST['deskripsi'];
                         $lokasi     = $_POST['lokasi'];
                         $tipe       = $_POST['tipe'];
                         $tglmulai   = date('Y-m-d', strtotime($_POST['tglmulaidaftar']));
@@ -24,6 +25,7 @@
                         $insert = mysqli_query($conn, "UPDATE lowongan SET
                                 provinsi_id         = '$lokasi',
                                 judul               = '$judul',
+                                deskripsi           = '$deskripsi',
                                 tipe                = '$tipe',
                                 mulai_pendaftaran   = '$tglmulai',
                                 akhir_pendaftaran   = '$tglselesai'

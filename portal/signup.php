@@ -30,7 +30,7 @@
 							<form action="signup.php" method="post" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="text" name="email" class="form-control" placeholder="email" required>
+									<input type="email" name="email" class="form-control" placeholder="email" required>
 								</div>
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">No Hp</label>

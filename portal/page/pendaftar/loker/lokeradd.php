@@ -25,10 +25,18 @@
                 if (isset($_POST['submit'])){
                     $id = $_POST['id'];
                     $userid = $_POST['user_id'];
-                    $delete = mysqli_query($conn, "DELETE FROM lowongan WHERE id='$id'");
-                    if ($delete) {
+                    $dateNow = date('Y-m-d');
+                    $idPendaftaran = getIdPendaftaran();
+                    $idKesehatan = getIdKesehatan();
+                    $idWawancara = getIdWawancara();
+                    $idPsikotest = getIdPsikotest();
+                    $update1 = mysqli_query($conn, "INSERT INTO pendaftaran SET id='$idPendaftaran', lowongan_id='$id', user_id='$userid', tgl_daftar='$dateNow'");
+                    $update2 = mysqli_query($conn, "INSERT INTO kesehatan SET id='$idKesehatan', pendaftaran_id='$idPendaftaran'");
+                    $update3 = mysqli_query($conn, "INSERT INTO wawancara SET id='$idWawancara', pendaftaran_id='$idPendaftaran'");
+                    $update4 = mysqli_query($conn, "INSERT INTO psikotest SET id='$idPsikotest', pendaftaran_id='$idPendaftaran'");
+                    if ($update1 && $update2 && $update3 && $update4) {
                         echo    '<div class="alert alert-success" role="alert">'.
-                                    '<i class="fa fa-check-circle"></i> Data berhasil dihapus'.
+                                    '<i class="fa fa-check-circle"></i> Pendaftaran Lowongan Pekerjaan berhasil'.
                                 '</div>';
                         echo "<meta http-equiv='refresh' content='1;
                         url=?page=loker'>";
