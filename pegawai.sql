@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2020 at 06:04 PM
+-- Generation Time: Jan 22, 2020 at 06:25 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama_lengkap`, `email`, `password`, `login_terakhir`) VALUES
-(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-15 07:46:48');
+(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-21 03:38:22');
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,13 @@ CREATE TABLE `kesehatan` (
   `kesehatan_bobot` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kesehatan`
+--
+
+INSERT INTO `kesehatan` (`id`, `pendaftaran_id`, `kesehatan_nilai`, `kesehatan_bobot`) VALUES
+('SEHAT00001', 'DAFTAR00001', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -65,7 +72,8 @@ CREATE TABLE `kesehatan` (
 CREATE TABLE `lowongan` (
   `id` varchar(10) CHARACTER SET latin1 NOT NULL,
   `provinsi_id` char(2) CHARACTER SET latin1 NOT NULL,
-  `judul` text CHARACTER SET latin1 NOT NULL,
+  `judul` text CHARACTER SET latin1 DEFAULT NULL,
+  `deskripsi` text CHARACTER SET latin1 DEFAULT NULL,
   `tipe` enum('fulltime','kontrak','magang','') CHARACTER SET latin1 NOT NULL,
   `mulai_pendaftaran` date NOT NULL,
   `akhir_pendaftaran` date NOT NULL
@@ -75,13 +83,13 @@ CREATE TABLE `lowongan` (
 -- Dumping data for table `lowongan`
 --
 
-INSERT INTO `lowongan` (`id`, `provinsi_id`, `judul`, `tipe`, `mulai_pendaftaran`, `akhir_pendaftaran`) VALUES
-('LOKER00001', '31', 'Electrical Engineering PLN Pusat', 'fulltime', '2020-01-01', '2020-01-05'),
-('LOKER00002', '16', 'Informatics Engineering PLN Palembang', 'fulltime', '2020-01-10', '2020-01-23'),
-('LOKER00003', '91', 'Mechanical Engineer Papua PLN Area Jayapura', 'fulltime', '2020-01-13', '2020-02-14'),
-('LOKER00004', '17', 'PNS Duri Kosambi', 'fulltime', '2020-01-20', '2020-01-31'),
-('LOKER00005', '11', 'Data Engineer PT ABC', 'fulltime', '2020-01-16', '2020-01-31'),
-('LOKER00006', '35', 'Business Analyst PT ABC', 'fulltime', '2020-01-16', '2020-01-31');
+INSERT INTO `lowongan` (`id`, `provinsi_id`, `judul`, `deskripsi`, `tipe`, `mulai_pendaftaran`, `akhir_pendaftaran`) VALUES
+('LOKER00001', '31', 'Electrical Engineering PLN Pusat', 'Mantap Dong', 'fulltime', '2020-01-01', '2020-01-05'),
+('LOKER00002', '16', 'Informatics Engineering PLN Palembang', NULL, 'fulltime', '2020-01-10', '2020-01-23'),
+('LOKER00003', '91', 'Mechanical Engineer Papua PLN Area Jayapura', NULL, 'fulltime', '2020-01-13', '2020-02-14'),
+('LOKER00004', '17', 'PNS Duri Kosambi', NULL, 'fulltime', '2020-01-20', '2020-01-31'),
+('LOKER00005', '11', 'Data Engineer PT ABC', NULL, 'fulltime', '2020-01-16', '2020-01-31'),
+('LOKER00006', '35', 'Business Analyst PT ABC', NULL, 'fulltime', '2020-01-16', '2020-01-31');
 
 -- --------------------------------------------------------
 
@@ -119,8 +127,16 @@ INSERT INTO `pemberkasan` (`id`, `user_id`, `file_ktp_upload`, `file_kk_upload`,
 CREATE TABLE `pendaftaran` (
   `id` varchar(11) CHARACTER SET latin1 NOT NULL,
   `lowongan_id` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
+  `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `tgl_daftar` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pendaftaran`
+--
+
+INSERT INTO `pendaftaran` (`id`, `lowongan_id`, `user_id`, `tgl_daftar`) VALUES
+('DAFTAR00001', 'LOKER00003', 'USER000002', '2020-01-21');
 
 -- --------------------------------------------------------
 
@@ -186,6 +202,13 @@ CREATE TABLE `psikotest` (
   `psikotest_bobot` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `psikotest`
+--
+
+INSERT INTO `psikotest` (`id`, `pendaftaran_id`, `psikotest_nilai`, `psikotest_bobot`) VALUES
+('PSIKO00001', 'DAFTAR00001', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -224,7 +247,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nik`, `nama_lengkap`, `tgl_lahir`, `alamat`, `jenis_kelamin`, `email`, `no_hp`, `password`, `image_url`, `login_terakhir`) VALUES
 ('USER000001', '9171030506960007', 'Muhammad Iriansyah Putra Pratama', '1996-06-05', 'Jl. H Junib No.18', 'L', 'ryanjoker87@gmail.com', '082248080870', 'Pace1996', 'USER000001_image_upload.jpg', NULL),
-('USER000002', '9171030506960010', 'Ryan Pace Pratama', '1996-06-05', 'Jl. H Junib No. 18 Duri Kosambi', 'L', 'pace@gmail.com', '081344460967', 'pace10', 'USER000002_image_upload.jpg', '2020-01-15 07:48:28'),
+('USER000002', '9171030506960010', 'Ryan Pace Pratama', '1996-06-05', 'Jl. H Junib No. 18 Duri Kosambi', 'L', 'pace@gmail.com', '081344460967', 'pace10', 'USER000002_image_upload.jpg', '2020-01-21 03:38:36'),
 ('USER000003', '9149014901859018', 'Eqi Seftiyan', '1970-01-01', 'Tigaraksa', 'L', 'eqhie@gmail.com', '081354141927', 'eqhie10', 'USER000003_image_upload.jpeg', '2020-01-15 07:01:10');
 
 -- --------------------------------------------------------
@@ -239,6 +262,13 @@ CREATE TABLE `wawancara` (
   `wawancara_nilai` int(3) DEFAULT NULL,
   `wawancara_bobot` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `wawancara`
+--
+
+INSERT INTO `wawancara` (`id`, `pendaftaran_id`, `wawancara_nilai`, `wawancara_bobot`) VALUES
+('WAWANCARA00001', 'DAFTAR00001', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -276,7 +306,8 @@ ALTER TABLE `pemberkasan`
 --
 ALTER TABLE `pendaftaran`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `lowongan_id` (`lowongan_id`);
+  ADD KEY `lowongan_id` (`lowongan_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `provinsi`
@@ -353,7 +384,8 @@ ALTER TABLE `pemberkasan`
 -- Constraints for table `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
-  ADD CONSTRAINT `pendaftaran_ibfk_1` FOREIGN KEY (`lowongan_id`) REFERENCES `lowongan` (`id`);
+  ADD CONSTRAINT `pendaftaran_ibfk_1` FOREIGN KEY (`lowongan_id`) REFERENCES `lowongan` (`id`),
+  ADD CONSTRAINT `pendaftaran_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `psikotest`
