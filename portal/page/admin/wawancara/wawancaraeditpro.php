@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="pull-left">
-                    <h3 class="panel-title">Edit Nilai Psikotest</h3>
+                    <h3 class="panel-title">Edit Nilai Wawancara</h3>
                     <p class="panel-subtitle"></p>
                 </div>
             </div>
@@ -27,9 +27,9 @@
                             $bobot = 25;
                         }
 
-                        $insert = mysqli_query($conn, "UPDATE psikotest SET
-                                psikotest_nilai = $nilai,
-                                psikotest_bobot = $bobot
+                        $insert = mysqli_query($conn, "UPDATE wawancara SET
+                                wawancara_nilai = $nilai,
+                                wawancara_bobot = $bobot
                                 WHERE id        = '$id'") or die (mysqli_error($conn));
                         
                         if ($insert){
@@ -37,7 +37,7 @@
 							            '<i class="fa fa-check-circle"></i> Data berhasil diedit'.
                                     '</div>';
                             echo "<meta http-equiv='refresh' content='1;
-                            url=?page=psikotest'>";
+                            url=?page=wawancara'>";
                         }
                     }
                 ?>

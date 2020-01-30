@@ -72,6 +72,7 @@
                 $email          = $_POST['email'];
                 $nohp           = $_POST['nohp'];
                 $password       = $_POST['password'];
+                $nilai          = 0;
 
                 //file upload 
                 $imageurlnow         = $_POST['imageurlnow'];
@@ -200,6 +201,23 @@
                     !empty($cvfilenow) ? $newcvfile = "'".$cvfilenow."'" : $newcvfile = "NULL";   
                 }
 
+                $newktpfile !== 'NULL' ? $nilai+=1 : $nilai=0;
+                $newkkfile !== 'NULL' ? $nilai+=1 : $nilai;
+                $newijazahfile !== 'NULL' ? $nilai+=1 : $nilai;
+                $newskckfile !== 'NULL' ? $nilai+=1 : $nilai;
+                $newsdfile !== 'NULL' ? $nilai+=1 : $nilai;
+                $newcvfile !== 'NULL' ? $nilai+=1 : $nilai;
+
+                if ($nilai == 6) {
+                    $bobot = 100;
+                } else if ($nilai == 5) {
+                    $bobot = 75;
+                } else if ($nilai == 4) {
+                    $bobot = 50;
+                } else if ($nilai <= 3) {
+                    $bobot = 25;
+                }
+
                 $insert1 = mysqli_query($conn, "UPDATE user SET
                         nik             = '$nik',
                         nama_lengkap    = '$nama',
@@ -218,7 +236,9 @@
                         file_ijazah_skl_upload      = $newijazahfile,
                         file_skck_upload            = $newskckfile,
                         file_surat_domisili_upload  = $newsdfile,
-                        file_cv_upload              = $newcvfile
+                        file_cv_upload              = $newcvfile,
+                        pemberkasan_nilai           = $nilai,
+                        pemberkasan_bobot           = $bobot
                         WHERE user_id               = '$id'") or die (mysqli_error($conn));
                 
                 if ($insert1 && $insert2) {

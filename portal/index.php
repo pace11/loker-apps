@@ -91,7 +91,7 @@
 				input.attr("type", "password");
 			}
 		});
-  </script>
+  	</script>
 </body>
 </html>
 <?php 

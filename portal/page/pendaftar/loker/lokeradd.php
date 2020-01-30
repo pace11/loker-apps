@@ -30,6 +30,7 @@
                     $idKesehatan = getIdKesehatan();
                     $idWawancara = getIdWawancara();
                     $idPsikotest = getIdPsikotest();
+
                     $update1 = mysqli_query($conn, "INSERT INTO pendaftaran SET id='$idPendaftaran', lowongan_id='$id', user_id='$userid', tgl_daftar='$dateNow'");
                     $update2 = mysqli_query($conn, "INSERT INTO kesehatan SET id='$idKesehatan', pendaftaran_id='$idPendaftaran'");
                     $update3 = mysqli_query($conn, "INSERT INTO wawancara SET id='$idWawancara', pendaftaran_id='$idPendaftaran'");
@@ -39,7 +40,7 @@
                                     '<i class="fa fa-check-circle"></i> Pendaftaran Lowongan Pekerjaan berhasil'.
                                 '</div>';
                         echo "<meta http-equiv='refresh' content='1;
-                        url=?page=loker'>";
+                        url=?page=lokeractive'>";
                     }
                 }
                 ?>

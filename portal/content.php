@@ -22,13 +22,26 @@ switch($_SESSION['role']){
         //------------------------------------ PENDAFTARAN ------------------------------------
         elseif ($page == 'pendaftaran')         include("page/admin/pendaftaran/pendaftaran.php");
 
+        //------------------------------------ PEMBERKASAN ------------------------------------
+        elseif ($page == 'pemberkasan')         include("page/admin/pemberkasan/pemberkasan.php");
+
         //------------------------------------ PSIKOTEST ------------------------------------
         elseif ($page == 'psikotest')           include("page/admin/psikotest/psikotest.php");
-        elseif ($page == 'psikotestadd')        include("page/admin/psikotest/psikotestadd.php");
-        elseif ($page == 'psikotestaddpro')     include("page/admin/psikotest/psikotestaddpro.php");
         elseif ($page == 'psikotestedit')       include("page/admin/psikotest/psikotestedit.php");
         elseif ($page == 'psikotesteditpro')    include("page/admin/psikotest/psikotesteditpro.php");
         elseif ($page == 'psikotestdelete')     include("page/admin/psikotest/psikotestdelete.php");
+
+        //------------------------------------ WAWANCARA ------------------------------------
+        elseif ($page == 'wawancara')           include("page/admin/wawancara/wawancara.php");
+        elseif ($page == 'wawancaraedit')       include("page/admin/wawancara/wawancaraedit.php");
+        elseif ($page == 'wawancaraeditpro')    include("page/admin/wawancara/wawancaraeditpro.php");
+        elseif ($page == 'wawancaradelete')     include("page/admin/wawancara/wawancaradelete.php");
+
+        //------------------------------------ KESEHATAN ------------------------------------
+        elseif ($page == 'kesehatan')           include("page/admin/kesehatan/kesehatan.php");
+        elseif ($page == 'kesehatanedit')       include("page/admin/kesehatan/kesehatanedit.php");
+        elseif ($page == 'kesehataneditpro')    include("page/admin/kesehatan/kesehataneditpro.php");
+        elseif ($page == 'kesehatandelete')     include("page/admin/kesehatan/kesehatandelete.php");
 
         //------------------------------------ USER ------------------------------------
         elseif ($page == 'user')                include("page/admin/user/user.php");

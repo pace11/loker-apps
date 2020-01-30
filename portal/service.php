@@ -57,7 +57,7 @@ function getIdPendaftaran(){
 function getIdPsikotest(){
     include "lib/koneksi.php";
     $get_id = mysqli_query($conn, "SELECT id FROM psikotest WHERE SUBSTRING(id,1,5)='PSIKO'") or die (mysqli_error($conn));
-    $trim_id = mysqli_query($conn, "SELECT SUBSTRING(id,-5,5) as hasil FROM psikotest WHERE SUBSTRING(id,1,6)='PSIKO' ORDER BY hasil DESC LIMIT 1") or die (mysqli_error($conn));
+    $trim_id = mysqli_query($conn, "SELECT SUBSTRING(id,-5,5) as hasil FROM psikotest WHERE SUBSTRING(id,1,5)='PSIKO' ORDER BY hasil DESC LIMIT 1") or die (mysqli_error($conn));
     $hit    = mysqli_num_rows($get_id);
     if ($hit == 0){
         $id_k   = "PSIKO00001";
@@ -99,5 +99,85 @@ function getIdWawancara(){
     return $id_k;
 }
 
+function getNilaiBobot($params) {
+    $tmp = 0;
+    if (!empty($params)) {
+        $tmp = $params;
+    } else {
+        $tmp = '<span class="label label-danger">belum ada</span>';
+    }
+    return $tmp;
+}
+
+function getNilaiBobotKesehatan($params) {
+    if ($params !== null) {
+        $tmp = $params.' penyakit';
+    } else {
+        $tmp = '<span class="label label-danger">belum ada</span>';
+    }
+    return $tmp;
+}
+
+function getNilaiBerkas($params) {
+    if ($params !== null) {
+        $tmp = $params.' berkas';
+    } else {
+        $tmp = '<span class="label label-danger">belum ada</span>';
+    }
+    return $tmp;
+}
+
+function getPendaftaran($params) {
+    if (!empty($params)) {
+        include './lib/koneksi.php';
+        $d = mysqli_query($conn, "SELECT pendaftaran.id as id_daftar, lowongan.judul as lowongan_judul FROM pendaftaran
+                                JOIN lowongan ON pendaftaran.lowongan_id=lowongan.id
+                                WHERE pendaftaran.id='$params'");
+        $data = mysqli_fetch_array($d);
+        return '<h4>'.$data['lowongan_id'].'</h4><p>'.$data['lowongan_judul'].'</p>';
+    }
+}
+
+function getStatus($params) {
+    if (!empty($params)) {
+        $tmp = '';
+        if ($params == 100) {
+            $tmp = '<span class="label label-success">sangat baik</span>';
+        } else if ($params == 75) {
+            $tmp = '<span class="label label-info">baik</span>';
+        } else if ($params == 50) {
+            $tmp = '<span class="label label-warning">cukup</span>';
+        } else if ($params == 25) {
+            $tmp = '<span class="label label-danger">kurang baik</span>';
+        }
+        return $tmp;
+    } else {
+        return '<span class="label label-danger">belum ada</span>';
+    }
+}
+
+function getStatusKesehatan($params) {
+    if (!empty($params)) {
+        $tmp = '';
+        if ($params == 25) {
+            $tmp = '<span class="label label-success">sangat baik</span>';
+        } else if ($params == 50) {
+            $tmp = '<span class="label label-info">baik</span>';
+        } else if ($params == 75) {
+            $tmp = '<span class="label label-warning">cukup</span>';
+        } else if ($params >= 100) {
+            $tmp = '<span class="label label-danger">kurang baik</span>';
+        }
+        return $tmp;
+    } else {
+        return '<span class="label label-danger">belum ada</span>';
+    }
+}
+
+function getCountAll($params){
+    include './lib/koneksi.php';
+    $num = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM ".$params.""));
+    return $num;
+}
 
 ?>

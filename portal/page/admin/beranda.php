@@ -9,26 +9,17 @@
                 <div class="metric">
                     <span class="icon"><i class="fa fa-users"></i></span>
                     <p>
-                        <span class="number">10</span>
-                        <span class="title">Siswa</span>
+                        <span class="number"><?= getCountAll('user') ?></span>
+                        <span class="title">User</span>
                     </p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="metric">
-                    <span class="icon"><i class="fa fa-user"></i></span>
+                    <span class="icon"><i class="fa fa-sticky-note"></i></span>
                     <p>
-                        <span class="number">12</span>
-                        <span class="title">Wali Kelas</span>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="metric">
-                    <span class="icon"><i class="fa fa-tag"></i></span>
-                    <p>
-                        <span class="number">15</span>
-                        <span class="title">Kriteria</span>
+                        <span class="number"><?= getCountAll('pendaftaran') ?></span>
+                        <span class="title">Pendaftar</span>
                     </p>
                 </div>
             </div>

@@ -69,8 +69,8 @@
 										$id_k   = "USER".str_pad($kode,6,"0", STR_PAD_LEFT);
 									}
 									
-									$insert1 = mysqli_query($conn, "INSERT INTO user SET id='$id_k', email='$email', no_hp='$nohp', password='$password', image_url=''") or die (mysqli_error($conn));
-									$insert2 = mysqli_query($conn, "INSERT INTO pemberkasan SET user_id='$id_k'") or die (mysqli_error($conn));
+									$insert1 = mysqli_query($conn, "INSERT INTO user SET id='$id_k', email='$email', no_hp='$nohp', password='$password'") or die (mysqli_error($conn));
+									$insert2 = mysqli_query($conn, "INSERT INTO pemberkasan SET user_id='$id_k', pemberkasan_nilai=0, pemberkasan_bobot=25") or die (mysqli_error($conn));
 
 									if ($insert1 && $insert2) {
 										echo '<span class="label label-primary label-block">Mendaftar akun berhasil <i class="fa fa-check"></i></span>';

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="pull-left">
-                    <h3 class="panel-title">Data Nilai Psikotest</h3>
+                    <h3 class="panel-title">Data Nilai Wawancara</h3>
                     <p class="panel-subtitle"></p>
                 </div>
                 <div class="pull-right">
@@ -13,7 +13,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <form action="?page=psikotest" method="post" enctype="multipart/form-data">
+            <form action="?page=wawancara" method="post" enctype="multipart/form-data">
                 <div class="col-md-8">
                     <select class="form-control" name="pendaftaran">
                     <option style="display:none;">-- pilih salah satu pendaftaran --</option>
@@ -55,15 +55,15 @@
                         <tbody>
                             <?php 
                             $no = 1;
-                            $q = mysqli_query($conn, "SELECT psikotest.id as id_psikotest, psikotest.pendaftaran_id as id_daftar, user.id as id_user, user.nama_lengkap as nama_user, psikotest.psikotest_nilai as nilai, psikotest.psikotest_bobot as bobot FROM psikotest
-                                                    JOIN pendaftaran ON psikotest.pendaftaran_id=pendaftaran.id
+                            $q = mysqli_query($conn, "SELECT wawancara.id as id_wawancara, wawancara.pendaftaran_id as id_daftar, user.id as id_user, user.nama_lengkap as nama_user, wawancara.wawancara_nilai as nilai, wawancara.wawancara_bobot as bobot FROM wawancara
+                                                    JOIN pendaftaran ON wawancara.pendaftaran_id=pendaftaran.id
                                                     JOIN user ON pendaftaran.user_id=user.id
                                                     WHERE pendaftaran.lowongan_id='$pendaftaran'") or die (mysqli_error($conn));
 
                             while($data=mysqli_fetch_array($q)){ ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><span class="label label-info"><?= $data['id_psikotest'] ?></span></td>
+                                    <td><span class="label label-info"><?= $data['id_wawancara'] ?></span></td>
                                     <td><span class="label label-info"><?= $data['id_daftar'] ?></span></td>
                                     <td><span class="label label-info"><i class="fa fa-user"></i> <?= $data['id_user'] ?></span></td>
                                     <td><?= $data['nama_user'] ?></td>
@@ -71,7 +71,7 @@
                                     <td><?= getNilaiBobot($data['bobot']) ?></td>
                                     <td><?= getStatus($data['bobot']) ?></td>
                                     <td>
-                                        <a href="?page=psikotestedit&id=<?= $data['id_psikotest'] ?>" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> edit</a>
+                                        <a href="?page=wawancaraedit&id=<?= $data['id_wawancara'] ?>" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> edit</a>
                                     </td>
                                 </tr>
                             <?php $no++; } ?>

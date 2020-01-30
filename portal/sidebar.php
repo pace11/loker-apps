@@ -15,9 +15,10 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="fa fa-cogs"></i> <span>Proses Tahap</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="fa fa-cog"></i> <span>Proses Tahap</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages2" class="collapse ">
                         <ul class="nav">
+                            <li><a href="?page=pemberkasan" class="">Pemberkasan</a></li>
                             <li><a href="?page=psikotest" class="">Psikotest</a></li>
                             <li><a href="?page=wawancara" class="">Wawancara</a></li>
                             <li><a href="?page=kesehatan" class="">Kesehatan</a></li>
