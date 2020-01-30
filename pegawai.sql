@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 30, 2020 at 12:19 PM
+-- Generation Time: Jan 30, 2020 at 09:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama_lengkap`, `email`, `password`, `login_terakhir`) VALUES
-(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-30 11:54:18');
+(1, 'Administrator', 'admin@gmail.com', 'admin123', '2020-01-30 09:06:06');
 
 -- --------------------------------------------------------
 
@@ -62,9 +62,11 @@ CREATE TABLE `kesehatan` (
 
 INSERT INTO `kesehatan` (`id`, `pendaftaran_id`, `kesehatan_nilai`, `kesehatan_bobot`) VALUES
 ('SEHAT00001', 'DAFTAR00001', 0, 25),
-('SEHAT00002', 'DAFTAR00002', NULL, NULL),
-('SEHAT00003', 'DAFTAR00003', NULL, NULL),
-('SEHAT00004', 'DAFTAR00004', NULL, NULL);
+('SEHAT00002', 'DAFTAR00002', 0, 25),
+('SEHAT00003', 'DAFTAR00003', 0, 25),
+('SEHAT00004', 'DAFTAR00004', 0, 25),
+('SEHAT00005', 'DAFTAR00005', 6, 100),
+('SEHAT00006', 'DAFTAR00006', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,10 +121,11 @@ CREATE TABLE `pemberkasan` (
 
 INSERT INTO `pemberkasan` (`id`, `user_id`, `file_ktp_upload`, `file_kk_upload`, `file_ijazah_skl_upload`, `file_skck_upload`, `file_surat_domisili_upload`, `file_cv_upload`, `pemberkasan_nilai`, `pemberkasan_bobot`) VALUES
 (1, 'USER000002', 'USER000002_ktpfile_upload.jpeg', NULL, NULL, 'USER000002_skckfile_upload.jpg', 'USER000002_sdfile_upload.jpg', 'USER000002_cvfile_upload.docx', 4, 50),
-(2, 'USER000001', 'USER000001_ktpfile_upload.jpg', NULL, NULL, NULL, 'USER000001_sdfile_upload.pdf', NULL, 2, 25),
-(3, 'USER000003', NULL, NULL, NULL, NULL, NULL, NULL, 0, 25),
-(4, 'USER000004', NULL, NULL, NULL, NULL, NULL, NULL, 0, 25),
-(5, 'USER000005', NULL, NULL, NULL, NULL, NULL, NULL, 0, 25);
+(2, 'USER000001', 'USER000001_ktpfile_upload.jpg', 'USER000001_kkfile_upload.jpg', NULL, 'USER000001_skckfile_upload.jpg', 'USER000001_sdfile_upload.pdf', NULL, 4, 50),
+(3, 'USER000003', 'USER000003_ktpfile_upload.pdf', NULL, 'USER000003_ijazahfile_upload.jpg', 'USER000003_skckfile_upload.jpg', NULL, 'USER000003_cvfile_upload.jpg', 4, 50),
+(4, 'USER000004', NULL, 'USER000004_kkfile_upload.pdf', 'USER000004_ijazahfile_upload.jpg', NULL, NULL, 'USER000004_cvfile_upload.pdf', 3, 25),
+(5, 'USER000005', 'USER000005_ktpfile_upload.jpg', 'USER000005_kkfile_upload.jpeg', NULL, 'USER000005_skckfile_upload.jpeg', NULL, NULL, 3, 25),
+(6, 'USER000006', NULL, NULL, NULL, NULL, NULL, NULL, 0, 25);
 
 -- --------------------------------------------------------
 
@@ -134,18 +137,21 @@ CREATE TABLE `pendaftaran` (
   `id` varchar(11) CHARACTER SET latin1 NOT NULL,
   `lowongan_id` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
   `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
-  `tgl_daftar` date DEFAULT NULL
+  `tgl_daftar` date DEFAULT NULL,
+  `pendaftaran_status` enum('lulus','gagal') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pendaftaran`
 --
 
-INSERT INTO `pendaftaran` (`id`, `lowongan_id`, `user_id`, `tgl_daftar`) VALUES
-('DAFTAR00001', 'LOKER00003', 'USER000002', '2020-01-21'),
-('DAFTAR00002', 'LOKER00003', 'USER000001', '2020-01-30'),
-('DAFTAR00003', 'LOKER00003', 'USER000004', '2020-01-30'),
-('DAFTAR00004', 'LOKER00003', 'USER000005', '2020-01-30');
+INSERT INTO `pendaftaran` (`id`, `lowongan_id`, `user_id`, `tgl_daftar`, `pendaftaran_status`) VALUES
+('DAFTAR00001', 'LOKER00003', 'USER000002', '2020-01-21', NULL),
+('DAFTAR00002', 'LOKER00003', 'USER000001', '2020-01-30', NULL),
+('DAFTAR00003', 'LOKER00003', 'USER000004', '2020-01-30', NULL),
+('DAFTAR00004', 'LOKER00003', 'USER000005', '2020-01-30', NULL),
+('DAFTAR00005', 'LOKER00004', 'USER000003', '2020-01-31', NULL),
+('DAFTAR00006', 'LOKER00006', 'USER000006', '2020-01-31', NULL);
 
 -- --------------------------------------------------------
 
@@ -216,10 +222,12 @@ CREATE TABLE `psikotest` (
 --
 
 INSERT INTO `psikotest` (`id`, `pendaftaran_id`, `psikotest_nilai`, `psikotest_bobot`) VALUES
-('PSIKO00001', 'DAFTAR00001', 91, 75),
-('PSIKO00002', 'DAFTAR00002', NULL, NULL),
-('PSIKO00003', 'DAFTAR00003', NULL, NULL),
-('PSIKO00004', 'DAFTAR00004', NULL, NULL);
+('PSIKO00001', 'DAFTAR00001', 95, 100),
+('PSIKO00002', 'DAFTAR00002', 83, 50),
+('PSIKO00003', 'DAFTAR00003', 70, 25),
+('PSIKO00004', 'DAFTAR00004', 70, 25),
+('PSIKO00005', 'DAFTAR00005', 98, 100),
+('PSIKO00006', 'DAFTAR00006', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,6 +237,7 @@ INSERT INTO `psikotest` (`id`, `pendaftaran_id`, `psikotest_nilai`, `psikotest_b
 
 CREATE TABLE `ranking` (
   `id` int(5) NOT NULL,
+  `pendaftaran_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `user_id` varchar(11) CHARACTER SET latin1 DEFAULT NULL,
   `ranking_nilai` decimal(5,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -258,11 +267,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nik`, `nama_lengkap`, `tgl_lahir`, `alamat`, `jenis_kelamin`, `email`, `no_hp`, `password`, `image_url`, `login_terakhir`) VALUES
-('USER000001', '9171030506960007', 'Muhammad Iriansyah Putra Pratama', '1996-06-05', 'Jl. H Junib No.18', 'L', 'ryanjoker87@gmail.com', '082248080870', 'Pace1996', 'USER000001_image_upload.jpg', '2020-01-30 08:45:37'),
+('USER000001', '9171030506960007', 'Muhammad Iriansyah Putra Pratama', '1996-06-05', 'Jl. H Junib No.18', 'L', 'ryanjoker87@gmail.com', '082248080870', 'Pace1996', 'USER000001_image_upload.jpg', '2020-01-30 03:48:36'),
 ('USER000002', '9171030506960010', 'Ryan Pace Pratama', '1996-06-05', 'Jl. H Junib No. 18 Duri Kosambi', 'L', 'pace@gmail.com', '081344460967', 'pace10', 'USER000002_image_upload.jpg', '2020-01-30 08:31:07'),
-('USER000003', '9149014901859018', 'Eqi Seftiyan', '1970-01-01', 'Tigaraksa', 'L', 'eqhie@gmail.com', '081354141927', 'eqhie10', 'USER000003_image_upload.jpeg', '2020-01-15 07:01:10'),
-('USER000004', '9391414914919414', 'Abdul Ghofur', '1970-01-01', 'Jl. Keramat Raya', 'L', 'abdulghofur@gmail.com', '089989898989', 'abdul10', NULL, '2020-01-30 11:18:02'),
-('USER000005', '8787818748158175', 'Abdul Ghandi', '1996-01-09', 'Jl. Duri Kosambi Jakarta Barat', 'L', 'abdulghandi@gmail.com', '981058908989', 'ghandi10', NULL, '2020-01-30 11:48:27');
+('USER000003', '9149014901859018', 'Eqi Seftiyan', '1970-01-01', 'Tigaraksa', 'L', 'eqhie@gmail.com', '081354141927', 'eqhie10', NULL, '2020-01-30 06:49:14'),
+('USER000004', '9391414914919414', 'Abdul Ghofur', '1970-01-01', 'Jl. Keramat Raya', 'L', 'abdulghofur@gmail.com', '089989898989', 'abdul10', NULL, '2020-01-30 04:01:28'),
+('USER000005', '8787818748158175', 'Abdul Ghandi', '1996-01-09', 'Jl. Duri Kosambi Jakarta Barat', 'L', 'abdulghandi@gmail.com', '981058908989', 'ghandi10', NULL, '2020-01-30 06:33:55'),
+('USER000006', '8989898098089089', 'Fahmi Roihanul Firdaus', '1970-01-01', 'Depok Baru', 'L', 'fahmi@gmail.com', '991589108591', 'fahmi10', NULL, '2020-01-30 09:01:09');
 
 -- --------------------------------------------------------
 
@@ -283,9 +293,11 @@ CREATE TABLE `wawancara` (
 
 INSERT INTO `wawancara` (`id`, `pendaftaran_id`, `wawancara_nilai`, `wawancara_bobot`) VALUES
 ('WAWANCARA00001', 'DAFTAR00001', 70, 25),
-('WAWANCARA00002', 'DAFTAR00002', NULL, NULL),
-('WAWANCARA00003', 'DAFTAR00003', NULL, NULL),
-('WAWANCARA00004', 'DAFTAR00004', NULL, NULL);
+('WAWANCARA00002', 'DAFTAR00002', 85, 50),
+('WAWANCARA00003', 'DAFTAR00003', 70, 25),
+('WAWANCARA00004', 'DAFTAR00004', 70, 25),
+('WAWANCARA00005', 'DAFTAR00005', 45, 25),
+('WAWANCARA00006', 'DAFTAR00006', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -344,7 +356,8 @@ ALTER TABLE `psikotest`
 --
 ALTER TABLE `ranking`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `pendaftaran_id` (`pendaftaran_id`);
 
 --
 -- Indexes for table `user`
@@ -373,7 +386,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `pemberkasan`
 --
 ALTER TABLE `pemberkasan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -414,7 +427,8 @@ ALTER TABLE `psikotest`
 -- Constraints for table `ranking`
 --
 ALTER TABLE `ranking`
-  ADD CONSTRAINT `ranking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `ranking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `ranking_ibfk_2` FOREIGN KEY (`pendaftaran_id`) REFERENCES `pendaftaran` (`id`);
 
 --
 -- Constraints for table `wawancara`

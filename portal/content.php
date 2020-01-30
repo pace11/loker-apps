@@ -22,6 +22,9 @@ switch($_SESSION['role']){
         //------------------------------------ PENDAFTARAN ------------------------------------
         elseif ($page == 'pendaftaran')         include("page/admin/pendaftaran/pendaftaran.php");
 
+        //------------------------------------ METODE ------------------------------------
+        elseif ($page == 'metode')              include("page/admin/metode/metode.php");
+
         //------------------------------------ PEMBERKASAN ------------------------------------
         elseif ($page == 'pemberkasan')         include("page/admin/pemberkasan/pemberkasan.php");
 

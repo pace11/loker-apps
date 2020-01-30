@@ -22,6 +22,7 @@
                             <li><a href="?page=psikotest" class="">Psikotest</a></li>
                             <li><a href="?page=wawancara" class="">Wawancara</a></li>
                             <li><a href="?page=kesehatan" class="">Kesehatan</a></li>
+                            <li><a href="?page=metode" class="">Metode</a></li>
                         </ul>
                     </div>
                 </li>

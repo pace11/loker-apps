@@ -7,28 +7,10 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="metric">
-                    <span class="icon"><i class="fa fa-users"></i></span>
+                    <span class="icon"><i class="fa fa-briefcase"></i></span>
                     <p>
-                        <span class="number">10</span>
-                        <span class="title">Siswa</span>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="metric">
-                    <span class="icon"><i class="fa fa-user"></i></span>
-                    <p>
-                        <span class="number">12</span>
-                        <span class="title">Wali Kelas</span>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="metric">
-                    <span class="icon"><i class="fa fa-tag"></i></span>
-                    <p>
-                        <span class="number">15</span>
-                        <span class="title">Kriteria</span>
+                        <span class="number"><?= getCountAllById('pendaftaran',$auth['id']) ?></span>
+                        <span class="title">Pekerjaan Aktif</span>
                     </p>
                 </div>
             </div>

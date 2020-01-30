@@ -180,4 +180,10 @@ function getCountAll($params){
     return $num;
 }
 
+function getCountAllById($params1,$params2){
+    include './lib/koneksi.php';
+    $num = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM ".$params1." WHERE user_id='$params2'"));
+    return $num;
+}
+
 ?>
