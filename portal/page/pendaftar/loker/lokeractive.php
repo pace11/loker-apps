@@ -19,23 +19,22 @@
                                 <th>No</th>
                                 <th>ID</th>
                                 <th>Judul</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal Mendaftar</th>
+                                <th>Tanggal Pendaftaran</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                                 $no = 1;
-                                $q = mysqli_query($conn, "SELECT pendaftaran.id as id_daftar, lowongan.judul, lowongan.provinsi_id FROM pendaftaran
-                                                        ");
+                                $q = mysqli_query($conn, "SELECT pendaftaran.id AS id, lowongan.judul AS judul_lowongan, pendaftaran.tgl_daftar AS tanggal_daftar FROM pendaftaran
+                                                        JOIN lowongan ON pendaftaran.lowongan_id=lowongan.id
+                                                        WHERE pendaftaran.user_id='$auth[id]'");
                                 while($data=mysqli_fetch_array($q)){
                             ?>
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><span class="label label-success"><i class="fa fa-circle"></i> <?= $data['iddaftar'] ?></span></td>
-                                    <td><?= $data['judul'] ?></td>
-                                    <td><?= $data['nama'] ?></td>
-                                    <td><?= date('d M Y', strtotime($data['tgl_daftar'])) ?></td>
+                                    <td><span class="label label-success"><i class="fa fa-circle"></i> <?= $data['id'] ?></span></td>
+                                    <td><?= $data['judul_lowongan'] ?></td>
+                                    <td><?= date('d M Y', strtotime($data['tanggal_daftar'])) ?></td>
                                 </tr>
                             <?php $no++; }?>
                         </tbody>

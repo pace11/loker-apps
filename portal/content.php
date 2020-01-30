@@ -19,6 +19,17 @@ switch($_SESSION['role']){
         elseif ($page == 'lokereditpro')        include("page/admin/loker/lokereditpro.php");
         elseif ($page == 'lokerdelete')         include("page/admin/loker/lokerdelete.php");
 
+        //------------------------------------ PENDAFTARAN ------------------------------------
+        elseif ($page == 'pendaftaran')         include("page/admin/pendaftaran/pendaftaran.php");
+
+        //------------------------------------ PSIKOTEST ------------------------------------
+        elseif ($page == 'psikotest')           include("page/admin/psikotest/psikotest.php");
+        elseif ($page == 'psikotestadd')        include("page/admin/psikotest/psikotestadd.php");
+        elseif ($page == 'psikotestaddpro')     include("page/admin/psikotest/psikotestaddpro.php");
+        elseif ($page == 'psikotestedit')       include("page/admin/psikotest/psikotestedit.php");
+        elseif ($page == 'psikotesteditpro')    include("page/admin/psikotest/psikotesteditpro.php");
+        elseif ($page == 'psikotestdelete')     include("page/admin/psikotest/psikotestdelete.php");
+
         //------------------------------------ USER ------------------------------------
         elseif ($page == 'user')                include("page/admin/user/user.php");
         elseif ($page == 'userdetail')          include("page/admin/user/userdetail.php");
@@ -39,6 +50,9 @@ switch($_SESSION['role']){
         elseif ($page == 'loker')               include("page/pendaftar/loker/loker.php");
         elseif ($page == 'lokeradd')            include("page/pendaftar/loker/lokeradd.php");
         elseif ($page == 'lokeractive')         include("page/pendaftar/loker/lokeractive.php");
+
+        //------------------------------------ HISTORY ------------------------------------
+        elseif ($page == 'historyloker')        include("page/pendaftar/historyloker/historyloker.php");
 
         else include("page/404.php");
     break;

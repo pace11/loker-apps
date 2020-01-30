@@ -10,12 +10,32 @@
                         <ul class="nav">
                             <li><a href="?page=loker" class="">Lowongan Pekerjaan</a></li>
                             <li><a href="?page=user" class="">Data User Pendaftar</a></li>
+                            <li><a href="?page=pendaftaran" class="">Pendaftaran</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="fa fa-cogs"></i> <span>Proses Tahap</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="subPages2" class="collapse ">
+                        <ul class="nav">
+                            <li><a href="?page=psikotest" class="">Psikotest</a></li>
+                            <li><a href="?page=wawancara" class="">Wawancara</a></li>
+                            <li><a href="?page=kesehatan" class="">Kesehatan</a></li>
                         </ul>
                     </div>
                 </li>
                 <?php } ?>
                 <?php if ($_SESSION['role'] == 2) { ?>
                 <li><a href="?page=loker" class=""><i class="fa fa-briefcase"></i> <span>Lowongan Pekerjaan</span></a></li>
+                <li><a href="?page=lokeractive" class=""><i class="fa fa-check-square"></i> <span>Lowongan Pekerjaan Aktif</span></a></li>
+                <li>
+                    <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-cogs"></i> <span>Proses Rekrutment</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="subPages" class="collapse ">
+                        <ul class="nav">
+                            <li><a href="?page=historyloker" class="">Riwayat Proses Rekrutment</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <?php } ?>
             </ul>
         </nav>
