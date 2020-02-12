@@ -17,6 +17,7 @@
                         $id         = $_POST['id'];
                         $judul      = $_POST['judul'];
                         $deskripsi  = $_POST['deskripsi'];
+                        $kuota      = $_POST['kuota'];
                         $lokasi     = $_POST['lokasi'];
                         $tipe       = $_POST['tipe'];
                         $tglmulai   = date('Y-m-d', strtotime($_POST['tglmulaidaftar']));
@@ -26,6 +27,7 @@
                                 provinsi_id         = '$lokasi',
                                 judul               = '$judul',
                                 deskripsi           = '$deskripsi',
+                                kuota               = $kuota,
                                 tipe                = '$tipe',
                                 mulai_pendaftaran   = '$tglmulai',
                                 akhir_pendaftaran   = '$tglselesai'

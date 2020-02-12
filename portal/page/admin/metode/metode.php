@@ -34,6 +34,9 @@
             <?php
             if (isset($_POST['submit'])) {
                 $idloker = $_POST['loker'];
+                $r = mysqli_query($conn, "SELECT * FROM lowongan WHERE id='$idloker'");
+                $getdata = mysqli_fetch_array($r);
+                $kuota = $getdata['kuota'];
                 $q = mysqli_query($conn, "SELECT * FROM pendaftaran
                                         JOIN user ON pendaftaran.user_id=user.id
                                         JOIN pemberkasan ON user.id=pemberkasan.user_id
@@ -103,19 +106,39 @@
 
                 for ($d=0;$d<count($isi);$d++){
                     for ($e=0;$e<count($isi[$d]['kriteria']);$e++){
-                        $isi[$d]['alternatif'][] = round(($isi[$d]['kriteria'][$e]/$allmax[$e]),4);
+                        $isi[$d]['alternatif'][] = round(($isi[$d]['kriteria'][$e]/$allmax[$e]),2);
                     }   
                 }
 
                 for ($d=0;$d<count($isi);$d++){
                     for ($e=0;$e<count($isi[$d]['alternatif']);$e++){
-                        $nilai_preferensi[$d] += round(($isi[$d]['alternatif'][$e]*$nilai_kriteria[$e]),4);
+                        $nilai_preferensi[$d] += round(($isi[$d]['alternatif'][$e]*$nilai_kriteria[$e]),2);
                     }   
                 }
 
                 for ($d=0;$d<count($isi);$d++){
                     $isi[$d]['nilai_preferensi'] = $nilai_preferensi[$d];
-                } ?>
+                }
+
+                foreach($isi as $val) {
+                    insertRanking($val['id_daftar'],$val['nilai_preferensi']);
+                }
+
+                $b = mysqli_query($conn, "SELECT * FROM pendaftaran
+                                        JOIN ranking ON pendaftaran.id=ranking.pendaftaran_id
+                                        WHERE pendaftaran.lowongan_id='$idloker'
+                                        ORDER BY ranking.ranking_nilai DESC");
+                $no = 1;
+                while($data = mysqli_fetch_array($b)) {
+                    if ($no <= $kuota) {
+                        updateRegister($data[0],'lulus');
+                    } else {    
+                        updateRegister($data[0],'gagal');
+                    }
+                    $no++;
+                }
+
+                ?>
                 <div class="col-md-12" style="margin-top: 15px;">
                     <div class="alert alert-info alert-dismissible" role="alert">
                         Rating Kecocokan Kriteria
@@ -203,6 +226,7 @@
                     <div class="alert alert-info alert-dismissible" role="alert">
                         Nilai Preferensi dan Ranking
                     </div>
+                    <a href="?page=cetak&id=<?= $idloker ?>&limit=<?= $kuota ?>" class="btn btn-info" style="margin-bottom: 15px;"> <i class="fa fa-print"></i> Cetak</a>
                     <div class="table-responsive">
                         <table class="table table-bordered example">
                             <thead>
@@ -218,14 +242,19 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                for ($a=0; $a<count($isi); $a++) {
+                                $q = mysqli_query($conn, "SELECT * FROM pendaftaran
+                                            JOIN user ON pendaftaran.user_id=user.id
+                                            JOIN ranking ON pendaftaran.id=ranking.pendaftaran_id
+                                            WHERE pendaftaran.lowongan_id='$idloker'
+                                            ORDER BY ranking.ranking_nilai DESC");
+                                while($datafinal = mysqli_fetch_array($q)){
                                     echo '<tr>';
                                     echo '<td>'.$no.'</td>';
-                                    echo '<td><span class="label label-info">'.$isi[$a]['id_daftar'].'</span></td>';
-                                    echo '<td><span class="label label-info">'.$isi[$a]['id_loker'].'</span></td>';
-                                    echo '<td><span class="label label-info"><i class="fa fa-user"></i> '.$isi[$a]['id_user'].'</span></td>';
-                                    echo '<td>'.$isi[$a]['nama'].'</td>';
-                                    echo '<td>'.$isi[$a]['nilai_preferensi'].'</td>';
+                                    echo '<td><span class="label label-info">'.$datafinal[0].'</span></td>';
+                                    echo '<td><span class="label label-info">'.$datafinal['lowongan_id'].'</span></td>';
+                                    echo '<td><span class="label label-info"><i class="fa fa-user"></i> '.$datafinal[5].'</span></td>';
+                                    echo '<td>'.$datafinal['nama_lengkap'].'</td>';
+                                    echo '<td>'.$datafinal['ranking_nilai'].'</td>';
                                     echo '</tr>';
                                     $no++;
                                 }

@@ -31,7 +31,7 @@
                     $idWawancara = getIdWawancara();
                     $idPsikotest = getIdPsikotest();
 
-                    $update1 = mysqli_query($conn, "INSERT INTO pendaftaran SET id='$idPendaftaran', lowongan_id='$id', user_id='$userid', tgl_daftar='$dateNow'");
+                    $update1 = mysqli_query($conn, "INSERT INTO pendaftaran SET id='$idPendaftaran', lowongan_id='$id', user_id='$userid', tgl_daftar='$dateNow', pendaftaran_status='proses'");
                     $update2 = mysqli_query($conn, "INSERT INTO kesehatan SET id='$idKesehatan', pendaftaran_id='$idPendaftaran'");
                     $update3 = mysqli_query($conn, "INSERT INTO wawancara SET id='$idWawancara', pendaftaran_id='$idPendaftaran'");
                     $update4 = mysqli_query($conn, "INSERT INTO psikotest SET id='$idPsikotest', pendaftaran_id='$idPendaftaran'");

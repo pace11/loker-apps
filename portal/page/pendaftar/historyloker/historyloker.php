@@ -12,10 +12,24 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                    <i class="fa fa-spinner fa-spin"></i> Tahap Pemberkasan <i class="fa fa-briefcase"></i>
-                </div>
+                <ul class="list-unstyled activity-timeline">
+                    <li>
+                        <i class="fa fa-comment activity-icon"></i>
+                        <p>Commented on post</p>
+                    </li>
+                    <li>
+                        <i class="fa fa-cloud-upload activity-icon"></i>
+                        <p>Uploaded new file</p>
+                    </li>
+                    <li>
+                        <i class="fa fa-plus activity-icon"></i>
+                        <p>Added</p>
+                    </li>
+                    <li>
+                        <i class="fa fa-check activity-icon"></i>
+                        <p>Finished</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

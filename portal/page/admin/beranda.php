@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="metric">
                     <span class="icon"><i class="fa fa-users"></i></span>
                     <p>
@@ -14,12 +14,21 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="metric">
                     <span class="icon"><i class="fa fa-sticky-note"></i></span>
                     <p>
                         <span class="number"><?= getCountAll('pendaftaran') ?></span>
                         <span class="title">Pendaftar</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="fa fa-briefcase"></i></span>
+                    <p>
+                        <span class="number"><?= getCountAll('lowongan') ?></span>
+                        <span class="title">Lowongan</span>
                     </p>
                 </div>
             </div>

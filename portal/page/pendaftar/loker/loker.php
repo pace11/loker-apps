@@ -20,6 +20,7 @@
                                 <th>ID</th>
                                 <th>Judul</th>
                                 <th>Lokasi</th>
+                                <th>Kuota</th>
                                 <th>Tipe</th>
                                 <th>Mulai Pendaftaran</th>
                                 <th>Akhir Pendaftaran</th>
@@ -29,7 +30,7 @@
                         <tbody>
                             <?php 
                                 $no = 1;
-                                $q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
+                                $q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.kuota, lowongan.tipe, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
                                                         JOIN provinsi ON lowongan.provinsi_id=provinsi.id");
                                 while($data=mysqli_fetch_array($q)){
                                 $datenow  = new DateTime(getDateNow());
@@ -42,11 +43,12 @@
                                     <td><span class="label label-success"><i class="fa fa-circle"></i> <?= $data['idloker'] ?></span></td>
                                     <td><?= $data['judul'] ?></td>
                                     <td><?= $data['nama'] ?></td>
+                                    <td><?= $data['kuota'] ?></td>
                                     <td><span class="label label-primary" style="text-transform: capitalize;"><i class="fa fa-briefcase"></i> <?= $data['tipe'] ?></span></td>
                                     <td><?= date('d M Y', strtotime($data['mulai_pendaftaran'])) ?></td>
                                     <td><?= date('d M Y', strtotime($data['akhir_pendaftaran'])) ?></td>
                                     <td>
-                                    <?= getActiveJob($data['mulai_pendaftaran'], $data['akhir_pendaftaran'], $data['idloker']) ?>
+                                    <?= getActiveJob($data['mulai_pendaftaran'], $data['akhir_pendaftaran'], $data['idloker'], $auth['id']) ?>
                                     </td>
                                 </tr>
                             <?php $no++; }} ?>

@@ -37,7 +37,15 @@
                         <div class="col-md-6">
                             <div clas="form-group">
                                 <label>Deksripsi</label>
-                                <textarea class="form-control" name="deskripsi" placeholder="masukkan deskripsi lowongan pekerjaan" autocomplete="OFF" required><?= $data['deskripsi'] ?></textarea>
+                                <textarea class="form-control" name="deskripsi" placeholder="masukkan deskripsi lowongan pekerjaan" autocomplete="OFF"><?= $data['deskripsi'] ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div clas="form-group">
+                                <label>Kuota</label>
+                                <input type="number" class="form-control" name="kuota" placeholder="masukkan kuota lowongan pekerjaan" autocomplete="OFF" value="<?= $data['kuota'] ?>" required>
                             </div>
                         </div>
                     </div>

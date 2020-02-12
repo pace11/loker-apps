@@ -50,6 +50,9 @@ switch($_SESSION['role']){
         elseif ($page == 'user')                include("page/admin/user/user.php");
         elseif ($page == 'userdetail')          include("page/admin/user/userdetail.php");
 
+        //------------------------------------ CETAK ------------------------------------
+        elseif ($page == 'cetak')               include("page/admin/cetak/cetak.php");
+
         else include("page/404.php");
     break;
     default:

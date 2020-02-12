@@ -73,7 +73,7 @@
 					</div>
 					<div class="row">
 						<?php 
-							$q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
+							$q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.mulai_pendaftaran, lowongan.kuota, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
 													JOIN provinsi ON lowongan.provinsi_id=provinsi.id
 													ORDER BY lowongan.mulai_pendaftaran ASC");
 							while($data = mysqli_fetch_array($q)) {
@@ -90,7 +90,7 @@
 										<h2 class="mr-3 text-black"><a href="#"><?= $data['judul'] ?></a></h2>
 									</div>
 									<div class="job-post-item-body d-block d-md-flex">
-										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> <?= $data['nama'] ?> - Mulai Pendaftaran: <?= date("d M Y", strtotime($data['mulai_pendaftaran']))." - ".date("d M Y", strtotime($data['akhir_pendaftaran'])) ?></div>
+										<div class="mr-3"><i class="fas fa-map-marker-alt"></i> <?= $data['nama'] ?> - Mulai Pendaftaran: <?= date("d M Y", strtotime($data['mulai_pendaftaran']))." - ".date("d M Y", strtotime($data['akhir_pendaftaran'])) ?>, Kuota: <?= $data['kuota'] ?></div>
 									</div>
 								</div>
 								<div class="one-forth col-md-3">

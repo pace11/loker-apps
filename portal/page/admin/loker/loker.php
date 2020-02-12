@@ -23,6 +23,7 @@
                                 <th>ID</th>
                                 <th>Judul</th>
                                 <th>Deskripsi</th>
+                                <th>Kuota</th>
                                 <th>Lokasi</th>
                                 <th>Tipe</th>
                                 <th>Mulai Pendaftaran</th>
@@ -33,7 +34,7 @@
                         <tbody>
                             <?php 
                             $no = 1;
-                            $q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.deskripsi, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
+                            $q = mysqli_query($conn, "SELECT lowongan.id as idloker, lowongan.judul, lowongan.tipe, lowongan.deskripsi, lowongan.kuota, lowongan.mulai_pendaftaran, lowongan.akhir_pendaftaran, provinsi.nama FROM lowongan
                                                     JOIN provinsi ON lowongan.provinsi_id=provinsi.id");
                             while($data=mysqli_fetch_array($q)){ ?>
                                 <tr>
@@ -41,6 +42,7 @@
                                     <td><span class="label label-success"><?= $data['idloker'] ?></span></td>
                                     <td><?= !empty($data['judul']) ? $data['judul'] : '-' ?></td>
                                     <td><?= !empty($data['deskripsi']) ? $data['deskripsi'] : '-' ?></td>
+                                    <td><?= $data['kuota'] ?></td>
                                     <td><?= $data['nama'] ?></td>
                                     <td><span class="label label-primary" style="text-transform: capitalize;"><?= $data['tipe'] ?></span></td>
                                     <td><?= date('d M Y', strtotime($data['mulai_pendaftaran'])) ?></td>

@@ -17,23 +17,31 @@ function getDateNow() {
     return $datetime->format('m/d/Y');
 }
 
-function getActiveJob($tglstart, $tglend, $id) {
+function getActiveJob($tglstart, $tglend, $id, $userid) {
     $val = "";
+    include 'lib/koneksi.php';
     $datenow  = new DateTime(getDateNow());
     $datestart  = new DateTime($tglstart);
     $dateend  = new DateTime($tglend);
     $diff   = $datestart->diff($datenow);
-    
-    if ($datestart > $datenow && $dateend >= $datenow) {
-        if ($diff->d <= 10) {
-            $val = '<span class="label label-info">'.$diff->d.' hari lagi pendaftaran Dibuka</span>';
-        } else {
-            $val = '<span class="label label-info">Segera Dibuka</span>';
-        }
-    }
 
-    if ($datestart <= $datenow && $dateend >= $datenow) {
-        $val = '<a href="?page=lokeradd&id='.$id.'" class="btn btn-primary btn-xs btn-block"><i class="fa fa-check-circle"></i> Pilih</a>';
+    $q = mysqli_query($conn, "SELECT * FROM pendaftaran WHERE lowongan_id='$id' AND user_id='$userid'");
+    $count = mysqli_num_rows($q);
+    
+    if ($count < 1) {
+        if ($datestart > $datenow && $dateend >= $datenow) {
+            if ($diff->d <= 10) {
+                $val = '<span class="label label-info">'.$diff->d.' hari lagi pendaftaran Dibuka</span>';
+            } else {
+                $val = '<span class="label label-info">Segera Dibuka</span>';
+            }
+        }
+    
+        if ($datestart <= $datenow && $dateend >= $datenow) {
+            $val = '<a href="?page=lokeradd&id='.$id.'" class="btn btn-primary btn-xs btn-block"><i class="fa fa-check-circle"></i> Pilih</a>';
+        }
+    } else {
+        $val = '<span class="label label-success">Sedang Aktif <i class="fa fa-check"></i></span>';
     }
 
     return $val;
@@ -184,6 +192,64 @@ function getCountAllById($params1,$params2){
     include './lib/koneksi.php';
     $num = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM ".$params1." WHERE user_id='$params2'"));
     return $num;
+}
+
+function stepRecruitment($params) {
+    $tmp = '';
+    include './lib/koneksi.php';
+    $step1 = mysqli_query($conn, "SELECT * FROM psikotest WHERE pendaftaran_id='$params'");
+    $data1 = mysqli_fetch_array($step1);
+    if ($data1['psikotest_nilai'] !== null) {
+        $tmp = '<button class="btn btn-success btn-block">Psikotest <i class="fa fa-check"></i></button>';
+    } else {
+        $tmp = '<button class="btn btn-primary btn-block" disabled>Psikotest <i class="fa fa-spinner fa-spin"></i></button>';
+    }
+
+    $step2 = mysqli_query($conn, "SELECT * FROM wawancara WHERE pendaftaran_id='$params'");
+    $data2 = mysqli_fetch_array($step2);
+    if ($data2['wawancara_nilai'] !== null) {
+        $tmp .= '<button class="btn btn-success btn-block">Wawancara <i class="fa fa-check"></i></button>';
+    } else {
+        $tmp .= '<button class="btn btn-primary btn-block" disabled>Wawancara <i class="fa fa-spinner fa-spin"></i></button>';
+    }
+
+    $step3 = mysqli_query($conn, "SELECT * FROM kesehatan WHERE pendaftaran_id='$params'");
+    $data3 = mysqli_fetch_array($step3);
+    if ($data3['kesehatan_nilai'] !== null) {
+        $tmp .= '<button class="btn btn-success btn-block">Kesehatan <i class="fa fa-check"></i></button>';
+    } else {
+        $tmp .= '<button class="btn btn-primary btn-block" disabled>Kesehatan <i class="fa fa-spinner fa-spin"></i></button>';
+    }
+
+    return $tmp;
+} 
+
+function statusPendaftaran($params) {
+    $tmp = '';
+    if ($params == 'proses') {
+        $tmp = '<span class="label label-info">Proses</span>';
+    } else if ($params == 'lulus') {
+        $tmp = '<span class="label label-success">Lulus</span>';
+    } else {
+        $tmp = '<span class="label label-danger">Gagal</span>';
+    }
+    return $tmp;
+}
+
+function insertRanking($params1, $params2) {
+    include './lib/koneksi.php';
+    $q = mysqli_query($conn, "SELECT * FROM ranking WHERE pendaftaran_id='$params1'");
+    $hit = mysqli_num_rows($q);
+    if ($hit > 0) {
+        mysqli_query($conn, "UPDATE ranking SET ranking_nilai=$params2 WHERE pendaftaran_id='$params1'");
+    } else {
+        mysqli_query($conn, "INSERT INTO ranking SET pendaftaran_id='$params1', ranking_nilai=$params2");
+    }
+}
+
+function updateRegister($params1, $params2) {
+    include './lib/koneksi.php';
+    mysqli_query($conn, "UPDATE pendaftaran SET pendaftaran_status='$params2' WHERE id='$params1'");
 }
 
 ?>
